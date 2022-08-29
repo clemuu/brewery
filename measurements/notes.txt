@@ -1,0 +1,3 @@
+at 750ml run: water was boiling when measurement value was at 8150
+
+sensor step response was with boiling water
