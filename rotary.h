@@ -39,7 +39,8 @@ void rotaryInit();
 
 int8_t rotaryGetCount();						//returns cnt 
 int8_t rotaryGetChange();						//returns cnt change since last call
+int8_t rotaryGetChangeWhileSwitch();			//returns cnt change since last call when switch turned on, otherwise returns 0
 uint8_t rotaryGetButton();						//returns last button states
-bool rotaryGetSwitch();						//returns switch status
+bool rotaryGetSwitch();							//returns switch status, true if turned on
 
 #endif /* ROTARY_H_ */

@@ -78,9 +78,9 @@ void showMenu()
 	
 	showText(0,1,"Tsoll: ", false, NULL);
 	
-	if(rotaryGetSwitch())												//turned on
-	{
-		setMenuTemp(rotaryGetChange());									//only change temp when switch turned on
+	if(rotaryGetSwitch())												//switch turned on
+	{	
+		setMenuTemp(rotaryGetChangeWhileSwitch());						//only change temp when switch turned on
 		showText(12,1,showMenuTemp(getMenuTemp(),buffer), true, &blinkFlag);
 		showText(12,2,"off", true, &blinkFlag2);
 

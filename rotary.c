@@ -56,12 +56,27 @@ int8_t rotaryGetChange()
 	return temp;	
 }
 
-uint8_t rotaryGetButton()
+int8_t rotaryGetChangeWhileSwitch()
+{
+	if(!rotaryGetSwitch())
+	{	
+		return 0;
+	}
+	else{
+	static int8_t last = 0;
+	int8_t temp = cnt - last;
+	
+	last = cnt;
+	return temp;	
+	}
+}
+
+uint8_t rotaryGetButton()				
 {
 	return button_status;
 }
 
-bool rotaryGetSwitch()
+bool rotaryGetSwitch()					
 {
 	return button_switch;
 }
