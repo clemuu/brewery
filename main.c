@@ -21,14 +21,16 @@ int main(void)
 		rotaryInit();
 		menuInit();
 		onewireInit();
+		set_resolution(CONFIG10);
 		
-		usartInit(MYUBRR);		
-		
+		usartInit(MYUBRR);
+				
+		controllerInit();
 		
 	
     while (1) 
     {
-	
+
     }
 }
 

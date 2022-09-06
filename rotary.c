@@ -20,9 +20,8 @@ void rotaryInit()
 	button_flag = false;
 	button_switch = false;
 		
-	TCCR1A =	(1<<COM1A0);
-	TCCR1B =	TIMER_CONTROL;			//F_TIMER = 125 kHz -> for F_INT = 1 kHz count to 125-1 (interrupt fired 1 cycle later)
-	OCR1A  =	TIMER_COMPARE;
+	TCCR1B |=	TIMER_CONTROL;			//F_TIMER = 125 kHz -> for F_INT = 1 kHz count to 125-1 (interrupt fired 1 cycle later)
+	OCR1A  |=	TIMER_COMPARE;
 	
 	TIMSK |= (1<<OCIE1A);										//Enable Output compare match interrupt enable (@TIMER_COMPARE)
 	

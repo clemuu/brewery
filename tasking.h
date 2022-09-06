@@ -16,7 +16,10 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include "comm/serialComm.h"
-
+#include "simplestMenu.h"
+#include "sens/ds18b20.h"
+#include <stdbool.h>
+#include "controller.h"
 
 void taskingInit();				//init of timer, interrupt 
 

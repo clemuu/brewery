@@ -5,20 +5,14 @@
  *  Author: Clem
  */ 
 #include "tasking.h"
-#include "simplestMenu.h"
-#include "sens/ds18b20.h"
-#include <stdbool.h>
+
 
 void taskingInit()
 {	
-	DDRD |= (1<<PD5);
-	
+		
 	TCCR0 |= TIMER0_CONTROL;			//Set prescaler
 	TIMSK |= (1<<TOIE0);				//Activate Timer0 overflow interrupt
 	sei();								//set enable interrupts
-
-	// ***** temp sensor specific **********
-	set_resolution(CONFIG10);
 	
 }
 
@@ -32,22 +26,26 @@ void exec33ms()
 			exec488ms();
 		}
 		
-	if(count % 30 == 0)
+	if(count % 17 == 0)
 		{			
 			exec990ms();
 		}
 	
-	if(count % 60 == 0)
+	if(count == 60)
 		{
 			count = 0;
 			exec1980ms();
 		}
+	
+	//**** Controller ****
+	pwm(powerToPwm(power),true );	
 		
 }
 
 void exec488ms()
 {	
 	showMenu();
+
 }
 
 
@@ -66,10 +64,22 @@ void exec990ms()
 		flag = !flag;
 		
 		if(actTemp >= 11000 || actTemp <= -500)
-			actTemp = 2000;							
+			actTemp = 2000;
 		
 		char* buffer[6];
-		usartSendString(itoa(actTemp,buffer,10));
+		
+		
+		//**** Controller ****
+		power = controller(getMenuTemp(), actTemp);	
+		
+		usartSendString("pwm: "); usartSendString(itoa(powerToPwm(power),buffer,10));
+		usartSendString("Power: "); usartSendString(itoa(power,buffer,10));
+		usartSendString("Temp act: "); usartSendString(itoa(actTemp,buffer,10));
+		usartSendString("Temp men: "); usartSendString(itoa(getMenuTemp(),buffer,10));
+		usartSendString("\n");
+		
+		
+		
 }
 
 void exec1980ms()
